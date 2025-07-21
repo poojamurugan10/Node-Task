@@ -64,13 +64,14 @@ export const forgotPassword = async (req, res) => {
     });
     //nodemailer part
     await sendEmail(
-      user.email,
-      "Password Reset Link",
-      `You are receiving this because you have requested the reset password for your account.
-      Please click the following link or paste it into your browser to complete the process
-      https://localhost:5173/reset-password /${user._id}/${token}
-      please ignore you have not requested for reset password.`
-    );
+  user.email,
+  "Password Reset Link",
+  `You are receiving this because you have requested the reset password for your account.
+  Please click the following link or paste it into your browser to complete the process:
+  http://localhost:5173/reset-password/${user._id}/${token}
+  If you did not request this, please ignore this email.`
+);
+
     res.status(200).json({ message: "Email sent successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
